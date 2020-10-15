@@ -8,7 +8,7 @@ Before running your private realm, you need to set up your data files, and initi
 First, you need to build data files using your latest WoW client.  Store this in a data volume or host location.  Your data will be stored in /data, and the client will be pulled from /wowclient.  You only need to do this once.  Note that due to the nature of the data pulling files, there will be temporary data written to the WoW client directory so it cannot be mounted as read-only.
 
 ```
-docker run -it --rm -v <WOW CLIENT VOLUME>:/wowclient -v <DATA VOLUME>:/data fdrake/trinitycore --builddata
+docker run -it --rm -v <WOW CLIENT VOLUME>:/wowclient -v <DATA VOLUME>:/data cuza/trinitycore --builddata
 ```
 
 ### Database Initialization
@@ -23,7 +23,7 @@ Next, you need to initialize your database with the create script which will cre
 Example:
 
 ```
-docker run --rm -e MYSQL_PORT=3306 -e MYSQL_HOST=mysql -e MYSQL_ROOT_PASSWORD=wow --network trinitycore_default fdrake/trinitycore --dbinit
+docker run --rm -e MYSQL_PORT=3306 -e MYSQL_HOST=mysql -e MYSQL_ROOT_PASSWORD=wow --network trinitycore_default cuza/trinitycore --dbinit
 ```
 
 Note, that if you are running MySQL 5.7 that you should disable strict mode in your database:
