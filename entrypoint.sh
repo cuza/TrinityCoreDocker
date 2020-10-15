@@ -2,13 +2,13 @@
 
 if [ "$1" == "--worldserver" ]; then
 	echo "Initiating world server"
-	cd /server/bin && ./worldserver -c /config/worldserver.conf
+	worldserver
 	exit 0
 fi
 
 if [ "$1" == "--bnetserver" ]; then
 	echo "Initiating bnet server"
-	cd /server/bin && ./bnetserver -c /config/bnetserver.conf
+	bnetserver
 	exit 0
 fi
 
@@ -24,14 +24,14 @@ if [ "$1" == "--builddata" ]; then
 	fi
 
 	cd /wowclient && \
-		/server/bin/mapextractor && \
+		mapextractor && \
 		cp -r dbc maps gt /data && \
-		/server/bin/vmap4extractor && \
+		vmap4extractor && \
 		mkdir vmaps && \
-		/server/bin/vmap4assembler Buildings vmaps && \
+		vmap4assembler Buildings vmaps && \
 		cp -r vmaps /data && \
 		mkdir mmaps && \
-		/server/bin/mmaps_generator && \
+		mmaps_generator && \
 		cp -r mmaps /data && \
 		cp -r cameras /data && \
 		rm -rf dbc cameras maps Buildings vmaps mmaps
@@ -59,7 +59,7 @@ if [ "$1" == "--dbinit" ]; then
 		MYSQL_ROOT_PASSWORD="root"
 	fi
 
-	cp ~/TrinityCore/sql/create/create_mysql.sql /tmp
+	cp ~/src/sql/create/create_mysql.sql /tmp
 	sed -i "s/'trinity'@'localhost'/'$MYSQL_USER'@'$MYSQL_USER_HOST'/g" /tmp/create_mysql.sql
 	sed -i "s/IDENTIFIED BY 'trinity'/IDENTIFIED BY '$MYSQL_PASSWORD'/g" /tmp/create_mysql.sql
 
