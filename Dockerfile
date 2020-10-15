@@ -35,7 +35,7 @@ FROM debian:10-slim
 
 RUN apt-get update && \
 	apt-get install -yqq libssl1.1 libmariadb3 libncurses6 libreadline7 libboost-system1.67.0 libboost-filesystem1.67.0 libboost-thread1.67.0 \
-	libboost-program-options1.67.0 libboost-iostreams1.67.0 libboost-regex1.67.0 libboost-chrono1.67.0 libboost-date-time1.67.0
+	libboost-program-options1.67.0 libboost-iostreams1.67.0 libboost-regex1.67.0 libboost-chrono1.67.0 libboost-date-time1.67.0 && \
 	rm -rf /var/lib/apt/lists/*
 
 COPY --from=build /usr/local/bin /usr/local/bin
